@@ -1,0 +1,51 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum CandidateStatus {
+  PENDING
+  SHORTLISTED
+  INTERVIEW
+  REJECTED
+}
+
+model JobOpening {
+  id             String      @id @default(uuid())
+  title          String
+  seniority      String
+  requiredSkills String      @db.Text
+  mustHaves      String      @db.Text
+  candidates     Candidate[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@map("job_openings")
+}
+
+model Candidate {
+  id                 String          @id @default(uuid())
+  jobOpeningId       String
+  jobOpening         JobOpening      @relation(fields: [jobOpeningId], references: [id], onDelete: Cascade)
+  name               String
+  email              String?
+  currentRole        String
+  experienceYears    Float
+  matchScore         Int
+  recommendation     String
+  status             CandidateStatus @default(PENDING)
+  strengths          Json
+  redFlags           Json
+  interviewQuestions Json
+  fileName           String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  @@index([jobOpeningId])
+  @@map("candidates")
+}
