@@ -89,7 +89,7 @@ Reviewing hundreds of technical resumes per opening creates a significant bottle
 
 ### Prerequisites
 * Node.js 18.x or later
-* pnpm (recommended) or npm
+* npm (recommended) or pnpm
 * Supabase PostgreSQL database
 * Google AI Studio API Key
 
@@ -103,7 +103,7 @@ Reviewing hundreds of technical resumes per opening creates a significant bottle
 
 2. **Install dependencies:**
    ```bash
-   pnpm install
+   npm install
    ```
 
 3. **Configure Environment Variables:**
@@ -125,7 +125,7 @@ Reviewing hundreds of technical resumes per opening creates a significant bottle
 
 5. **Run Development Server:**
    ```bash
-   pnpm run dev
+   npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
